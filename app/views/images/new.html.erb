@@ -1,18 +1,8 @@
 <h1>New Image</h1>
 
-<% if !!flash[:errors] %>
-<p>
-<% flash[:errors].each do |e| %>
-  <%= e %> <br>
-  <% end %>
-</p>
-<% end %>
-
-<%#= render 'form', image: @image %>
-<%= form_with(url: images_path, method: 'post') do %>
-  <%= label_tag(:link, 'New image: ') %>
-  <%= text_field_tag(:link) %>
-  <%= submit_tag('create') %>
+<%= simple_form_for @image do |f| %>
+  <%= f.input :link %>
+  <%= f.button :submit %>
 <% end %>
 
 <%= link_to 'Back', images_path %>
