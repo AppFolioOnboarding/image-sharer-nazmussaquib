@@ -19,7 +19,7 @@ class ImagesController < ApplicationController
 
   # POST /images
   def create
-    @image = Image.new(image_params)
+    @image = Image.new({:link => params[:link]})
 
     if @image.save
       redirect_to @image, notice: 'Image was successfully created.'
