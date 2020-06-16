@@ -17,7 +17,7 @@ class ImagesController < ApplicationController
       redirect_to @image, notice: 'Image was successfully created.'
     else
       flash[:errors] = @image.errors.full_messages
-      render 'new', status: :unprocessable_entity 
+      render 'new', status: :unprocessable_entity
     end
   end
 
