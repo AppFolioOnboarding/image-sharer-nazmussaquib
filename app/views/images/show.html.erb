@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Link:</strong>
-  <%= @image.link %>
+  <%= image_tag(@image.link, size: '400') %>
 </p>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
