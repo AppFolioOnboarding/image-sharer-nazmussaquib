@@ -1,0 +1,15 @@
+<div id='hello'>Hello World!</div>
+
+<%= link_to 'New Image', new_image_path %>
+
+<% if @images.count == 0 %>
+  <%= content_tag(:p, 'no images', id: 'emptyImageList') %>
+<% end %>
+
+<% @images.each do |image| %>
+  <p>
+    <%= image_tag(image.link, class: 'img-width-restrict' ) %>
+    <br>created at: <%= image.created_at %>
+  </p>
+<% end %>
+
