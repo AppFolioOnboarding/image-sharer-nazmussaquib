@@ -5,5 +5,6 @@ class ApplicationControllerTest < ActionDispatch::IntegrationTest
     get root_path
     assert_response :success
     assert_select '#hello', 'Hello World!'
+    assert_select 'a[href=?]', '/images/new'
   end
 end
