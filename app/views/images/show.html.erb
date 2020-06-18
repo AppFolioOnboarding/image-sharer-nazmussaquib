@@ -2,4 +2,10 @@
 
 <p>
   <%= image_tag(@image.link, class: 'img-width-restrict') %>
+  <br>
+  <% @image.tags.each do |image_tag| %>
+    <div class='image-tags'>
+    <%= image_tag %>
+    </div>
+  <% end %>
 </p>

@@ -14,4 +14,9 @@ class ImageTest < ActiveSupport::TestCase
     img.link = 'https://www.someplace.com'
     assert_predicate img, :valid?
   end
+
+  test 'tag is included' do
+    img = Image.create!(link: 'https://something.com', tag_list: 'asd, bnf')
+    assert_equal %w[asd bnf], img.tags.map(&:name)
+  end
 end

@@ -8,6 +8,7 @@ AllCops:
     - 'bin/*'
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'config/initializers/simple_form.rb'
+    - 'db/migrate/*taggable*'
   TargetRubyVersion: 2.5
 
 Layout/IndentFirstArrayElement:
