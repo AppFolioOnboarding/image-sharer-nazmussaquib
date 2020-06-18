@@ -9,11 +9,35 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '#emptyImageList', 'no images'
   end
 
+  test 'should show no images when searched with garbage tag' do
+    get images_path(q: 'asd')
+    assert_response :ok
+    assert_select '#emptyImageList', 'no images'
+  end
+
+  test 'should get filtered images in index' do
+    imgs = [
+      Image.create!(link: 'https://www.something.com', tag_list: 'asd, bnf', created_at: Time.now - 1.hour),
+      Image.create!(link: 'https://www.somethingelse.com',
+                    tag_list: 'asd, bnf', created_at: Time.now - 2.hours),
+      Image.create!(link: 'https://www.somethingelseagain.com', tag_list: 'bnf', created_at: Time.now - 3.hours)
+    ]
+    get images_path(q: 'asd')
+    assert_response :ok
+    assert_select '.image-container' do |images|
+      assert_equal 2, images.size
+      images.each_with_index do |image, idx|
+        assert_select image, ".img-width-restrict[src='#{imgs[idx].link}']"
+        assert_select image, '.image-tags', text: 'asd'
+      end
+    end
+  end
+
   test 'should show images' do
     img1 = Image.create!(link: 'https://www.something.com', created_at: Time.now - 1.hour)
     img2 = Image.create!(link: 'https://www.somethingelse.com', created_at: Time.now - 2.hours)
     get images_path
-    arr = assert_select 'img.img-width-restrict'
+    arr = assert_select '.img-width-restrict'
     assert_equal arr[0]['src'], img1.link
     assert_equal arr[1]['src'], img2.link
   end

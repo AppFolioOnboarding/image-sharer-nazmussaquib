@@ -3,16 +3,11 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.order(created_at: :desc)
+    @images = @images.tagged_with(params[:q]) if params[:q].present?
   end
 
   # GET /images/1
   def show; end
-
-  # GET /images/search/tag
-  def search
-    @images = Image.tagged_with(params[:q])
-    render 'index'
-  end
 
   # GET /images/new
   def new
