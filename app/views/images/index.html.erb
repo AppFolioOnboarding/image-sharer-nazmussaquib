@@ -10,6 +10,12 @@
   <p>
     <%= image_tag(image.link, class: 'img-width-restrict' ) %>
     <br>created at: <%= image.created_at %>
+    <br>tags: 
+    <% image.tags.each do |image_tag| %>
+      <span class='image-tags'>
+      <%= image_tag %>
+      </span>
+    <% end %>
   </p>
 <% end %>
 
