@@ -38,6 +38,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     img1 = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
     get image_url(img1.id)
     assert_response :success
-    assert_select '.image-tags'
+    assert_select '.image-tags', html: 'asd'
+    assert_select '.image-tags', html: 'ghj'
   end
 end
