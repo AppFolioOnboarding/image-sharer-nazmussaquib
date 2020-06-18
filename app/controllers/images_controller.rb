@@ -8,6 +8,12 @@ class ImagesController < ApplicationController
   # GET /images/1
   def show; end
 
+  # GET /images/search/tag
+  def search
+    @images = Image.tagged_with(params[:q])
+    render 'index'
+  end
+
   # GET /images/new
   def new
     @image = Image.new

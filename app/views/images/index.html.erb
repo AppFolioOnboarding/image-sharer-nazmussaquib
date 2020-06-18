@@ -13,7 +13,7 @@
     <br>tags: 
     <% image.tags.each do |image_tag| %>
       <span class='image-tags'>
-      <%= image_tag %>
+      <%= link_to image_tag, "/images/search/#{image_tag}" %>
       </span>
     <% end %>
   </p>
