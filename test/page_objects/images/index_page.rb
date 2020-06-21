@@ -20,13 +20,9 @@ module PageObjects
         link_present = node.has_css?("img[src='#{link}']")
         if link_present
           image_container = node.find("img[src='#{link}']").find(:xpath, '..')
-          if tags.present?
-            image_tags = image_container.all('.image-tags').map do |dom_tag|
-              dom_tag.text
-            end
-          end
+          image_tags = image_container.all('.image-tags').map(&:text) if tags.present?
         end
-        link_present and image_tags == tags
+        link_present && image_tags == tags
       end
 
       def clear_tag_filter!

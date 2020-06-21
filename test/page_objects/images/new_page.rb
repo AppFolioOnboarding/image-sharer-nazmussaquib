@@ -5,13 +5,13 @@ module PageObjects
       path :images # form failed create
 
       form_for :image do
-        element :link, error_html: {class: 'invalid-feedback'}
+        element :link, error_html: { class: 'invalid-feedback' }
         element :tag_list
       end
 
       def create_image!(link: nil, tags: nil)
         self.link.set(link) if link.present?
-        self.tag_list.set(tags) if tags.present?
+        tag_list.set(tags) if tags.present?
         node.click_on('Create Image')
         window.change_to(ShowPage, self.class)
       end
