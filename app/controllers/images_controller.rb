@@ -26,6 +26,13 @@ class ImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+
+    redirect_to images_path, notice: 'You have successfully deleted the image.'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

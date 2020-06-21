@@ -1,4 +1,7 @@
 <div id='hello'>Hello World!</div>
+<%= link_to 'Image List', images_path %>
+
+<p class='success'><%= notice %></p>
 
 <%= link_to 'New Image', new_image_path %>
 
@@ -6,6 +9,7 @@
   <%= content_tag(:p, 'no images', id: 'emptyImageList') %>
 <% end %>
 
+<div class='image-collection'>
 <% @images.each do |image| %>
   <p class='image-container'>
     <%= image_tag(image.link, class: 'img-width-restrict' ) %>
@@ -16,6 +20,7 @@
       <%= link_to image_tag, images_path(q: image_tag.name) %>
       </span>
     <% end %>
+    <br><%= link_to 'View', image  %>
   </p>
 <% end %>
-
+</div>
