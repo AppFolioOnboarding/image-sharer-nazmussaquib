@@ -65,4 +65,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_select '.image-tags', text: 'asd'
     assert_select '.image-tags', text: 'ghj'
   end
+
+  test 'should destroy successfully' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    assert_difference 'Image.count', -1 do
+      delete image_url(img.id)
+    end
+    assert_redirected_to images_path
+    assert_equal 'You have successfully deleted the image.', flash['notice']
+  end
+
 end
