@@ -9,7 +9,7 @@
   <br>tags: 
   <% @image.tags.each do |image_tag| %>
     <span class='image-tags'>
-    <%= link_to image_tag, images_path(q: image_tag.name) %>
+    <%= link_to image_tag, images_path(filters: image_tag.name) %>
     </span>
   <% end %>
 

@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.order(created_at: :desc)
-    @images = @images.tagged_with(params[:q]) if params[:q].present?
+    @images = @images.tagged_with(params[:filters]) if params[:filters].present?
   end
 
   # GET /images/1
