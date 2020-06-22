@@ -34,8 +34,9 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show images' do
-    img1 = Image.create!(link: 'https://www.something.com', created_at: Time.now - 1.hour)
-    img2 = Image.create!(link: 'https://www.somethingelse.com', created_at: Time.now - 2.hours)
+    img1 = Image.create!(link: 'https://www.something.com', tag_list: 'asd, bnf', created_at: Time.now - 1.hour)
+    img2 = Image.create!(link: 'https://www.somethingelse.com',
+                         tag_list: 'foo, bar', created_at: Time.now - 2.hours)
     get images_path
     arr = assert_select '.img-width-restrict'
     assert_equal arr[0]['src'], img1.link

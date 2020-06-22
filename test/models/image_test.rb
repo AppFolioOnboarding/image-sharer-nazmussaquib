@@ -4,9 +4,10 @@ class ImageTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
-  test 'link is valid' do
+  test 'link is valid and tag is present' do
     img = Image.new
     refute_predicate img, :valid?
+    img.tag_list = 'foo, bar'
 
     img.link = 'something'
     refute_predicate img, :valid?

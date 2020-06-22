@@ -11,7 +11,8 @@ class ImagesCrudTest < FlowTestCase
       link: 'invalid',
       tags: tags.join(', ')
     ).as_a(PageObjects::Images::NewPage)
-    assert_equal 'Link is invalid', new_image_page.error_message
+    assert_equal false, new_image_page.error_message('Tag list can\'t be blank')
+    assert_equal true, new_image_page.error_message('Link is invalid')
 
     image_url = 'https://media3.giphy.com/media/EldfH1VJdbrwY/200.gif'
     new_image_page.link.set(image_url)
