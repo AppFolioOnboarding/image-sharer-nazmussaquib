@@ -14,7 +14,7 @@ class AddDefaultTagListToImage < ActiveRecord::Migration[5.2]
     images = Image.all
     images.each do |image|
       if image.tag_list.include?('default')
-        image.tag_list.remove('default') 
+        image.tag_list.remove('default')
         image.save
       end
     end
