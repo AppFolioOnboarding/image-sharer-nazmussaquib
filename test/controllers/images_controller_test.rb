@@ -10,7 +10,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show no images when searched with garbage tag' do
-    get images_path(q: 'asd')
+    get images_path(filters: 'asd')
     assert_response :ok
     assert_select '#emptyImageList', 'no images'
   end
@@ -22,7 +22,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
                     tag_list: 'asd, bnf', created_at: Time.now - 2.hours),
       Image.create!(link: 'https://www.somethingelseagain.com', tag_list: 'bnf', created_at: Time.now - 3.hours)
     ]
-    get images_path(q: 'asd')
+    get images_path(filters: 'asd')
     assert_response :ok
     assert_select '.image-container' do |images|
       assert_equal 2, images.size
@@ -64,5 +64,14 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select '.image-tags', text: 'asd'
     assert_select '.image-tags', text: 'ghj'
+  end
+
+  test 'should destroy successfully' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    assert_difference 'Image.count', -1 do
+      delete image_url(img.id)
+    end
+    assert_redirected_to images_path
+    assert_equal 'You have successfully deleted the image.', flash['notice']
   end
 end

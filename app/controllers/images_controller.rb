@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
 
   def index
     @images = Image.order(created_at: :desc)
-    @images = @images.tagged_with(params[:q]) if params[:q].present?
+    @images = @images.tagged_with(params[:filters]) if params[:filters].present?
   end
 
   # GET /images/1
@@ -26,6 +26,13 @@ class ImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(destroy_params)
+    @image.destroy
+
+    redirect_to images_path, notice: 'You have successfully deleted the image.'
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -36,5 +43,9 @@ class ImagesController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def image_params
     params.require(:image).permit(:link, :tag_list)
+  end
+
+  def destroy_params
+    params.require(:id)
   end
 end
