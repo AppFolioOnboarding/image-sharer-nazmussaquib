@@ -26,6 +26,18 @@ class ImagesController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    @image = Image.find(params[:id])
+    if @image.update(image_params)
+      redirect_to @image, notice: 'Image was successfully edited.'
+    else
+      flash[:errors] = @image.errors.full_messages
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @image = Image.find(destroy_params)
     @image.destroy

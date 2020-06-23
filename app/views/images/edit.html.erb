@@ -1,0 +1,9 @@
+<h1>Edit Image Tags</h1>
+<p>
+  <%= image_tag(@image.link, class: 'img-width-restrict') %>
+</p>
+<%= simple_form_for(@image, method: :patch) do |f| %>
+  <%= f.input :tag_list, input_html: {value: @image.tag_list.to_s} %>
+  <%= f.submit 'Edit Tags' %>
+<% end %>
+
