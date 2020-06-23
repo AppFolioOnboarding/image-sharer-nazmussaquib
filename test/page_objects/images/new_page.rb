@@ -6,7 +6,7 @@ module PageObjects
 
       form_for :image do
         element :link, error_html: { class: 'invalid-feedback' }
-        element :tag_list
+        element :tag_list, error_html: { class: 'invalid-feedback' }
       end
 
       def create_image!(link: nil, tags: nil)
