@@ -75,4 +75,33 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to images_path
     assert_equal 'You have successfully deleted the image.', flash['notice']
   end
+
+  test 'show page should have edit tags link' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    get image_url(img.id)
+    assert_select 'a[href=?]', edit_image_path(img.id)
+  end
+
+  test 'index page should have edit tags link' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    get images_url
+    assert_select 'a[href=?]', edit_image_path(img.id)
+  end
+
+  test 'edit page should display picture' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    get edit_image_url(img.id)
+    assert_select 'img[src=?]', img.link
+  end
+
+  test 'should edit tags successfully' do
+    img = Image.create!(link: 'https://www.something.com', tag_list: 'asd, ghj', created_at: Time.now - 1.hour)
+    patch image_url(img.id), params: { image: { tag_list: 'one, two' } }
+
+    img.reload
+    assert 'one, two', img.tag_list
+
+    assert_redirected_to image_path(img.id)
+    assert_equal 'Image was successfully edited.', flash['notice']
+  end
 end
