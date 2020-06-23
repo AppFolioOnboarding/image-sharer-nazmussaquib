@@ -74,5 +74,4 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to images_path
     assert_equal 'You have successfully deleted the image.', flash['notice']
   end
-
 end
