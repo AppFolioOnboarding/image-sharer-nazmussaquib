@@ -2,8 +2,9 @@ module PageObjects
   module Images
     class IndexPage < PageObjects::Document
       path :images
-
-      collection :images, locator: '.image-collection', item_locator: '.image-container', contains: ImageCard do
+      # rubocop:disable LineLength
+      collection :images, locator: '.image-collection', item_locator: '.image-container', contains: PageObjects::Images::ImageCard do
+        # rubocop:enable LineLength
         def view!
           node.click_on('View')
           window.change_to(ShowPage)
