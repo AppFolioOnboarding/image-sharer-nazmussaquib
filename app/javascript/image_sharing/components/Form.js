@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-class Footer extends Component {
+class Form extends Component {
   /* Implement your Footer component here */
-  static propTypes = {
-    title: PropTypes.string.isRequired
-  };
+  // static propTypes = {
+  //   title: PropTypes.string.isRequired
+  // };
 
   render() {
-    const title = this.props.title;
+    // const title = this.props.title;
     return (
       <div>
         <Row>
           <Col lg={{ size: 4, offset: 4 }}>
-            <span className='text-center'>
-              {title}
-            </span>
+            Whatever
           </Col>
         </Row>
       </div>
@@ -24,4 +22,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default Form;
