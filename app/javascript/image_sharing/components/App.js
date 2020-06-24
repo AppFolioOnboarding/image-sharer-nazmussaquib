@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Footer from "./Footer";
+import Footer from './Footer';
 
 export default class App extends Component {
   /* Add Prop Types check*/
@@ -10,6 +10,6 @@ export default class App extends Component {
         <Header title="Tell us what you think" />
         <Footer title="Copyright: Appfolio Inc. Onboarding" />
       </div>
-    )
+    );
   }
 }

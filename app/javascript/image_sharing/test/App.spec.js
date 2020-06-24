@@ -1,3 +1,5 @@
+/* eslint-env mocha */
+
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
@@ -10,7 +12,7 @@ describe('<App />', () => {
     const wrapper = mount(<App />);
     const header = wrapper.find(Header);
     const footer = wrapper.find(Footer);
-    expect(header.props().title).to.eq("Tell us what you think");
-    expect(footer.props().title).to.eq( "Copyright: Appfolio Inc. Onboarding");
+    expect(header.props().title).to.eq('Tell us what you think');
+    expect(footer.props().title).to.eq('Copyright: Appfolio Inc. Onboarding');
   });
 });
