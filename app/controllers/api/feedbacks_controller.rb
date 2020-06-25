@@ -2,8 +2,8 @@ module Api
   class FeedbacksController < ApplicationController
     def create
       # Implement your create action
-      @feedback = Feedback.new(feedback_params)
-      @feedback.save
+      Feedback.create!(feedback_params)
+      head :no_content
     end
 
     private
