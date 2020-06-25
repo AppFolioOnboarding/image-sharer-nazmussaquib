@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
+import { PostFeedbackService } from '../services/PostFeedbackService';
 
 @observer
 class FeedbackForm extends Component {
@@ -17,6 +18,17 @@ class FeedbackForm extends Component {
     this.props.store.setName(e.currentTarget.value);
   }
 
+  onFeedbackClick = (e) => {
+    const params = {
+      feedback: {
+        name: this.props.store.name,
+        feedback: this.props.store.feedback
+      }
+    };
+    const service = new PostFeedbackService(params);
+    service.postFeedback();
+  }
+
   render() {
     return (
       <div>
@@ -28,7 +40,7 @@ class FeedbackForm extends Component {
           <textarea name="feedback" id="feedback" onChange={this.onFeedbackChange} /><br />
         </label>
         <br />
-        <input type="button" value="Submit" id="submit" />
+        <input type="button" value="Submit" id="submit" onClick={this.onFeedbackClick} />
       </div>
     );
   }
