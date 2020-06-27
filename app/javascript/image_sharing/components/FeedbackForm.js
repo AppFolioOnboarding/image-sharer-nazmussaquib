@@ -9,6 +9,17 @@ class FeedbackForm extends Component {
     store: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.state = { message: '' };
+  }
+
+  onSubmit = () => {
+    this.props.store.onFeedbackClick()
+      .then(() => this.setState({ message: 'success' }))
+      .catch(() => this.setState({ message: 'failure' }));
+  };
+
   onFeedbackChange = (e) => {
     this.props.store.setFeedback(e.currentTarget.value);
   }
@@ -20,7 +31,7 @@ class FeedbackForm extends Component {
   render() {
     return (
       <div>
-        <div>{this.props.store.message}</div>
+        <div id="formNotice">{this.state.message}</div>
         <label htmlFor="name" id="forName">Your Name<br />
           <input name="name" id="name" type="text" onChange={this.onNameChange} /><br />
         </label>
@@ -29,7 +40,7 @@ class FeedbackForm extends Component {
           <textarea name="feedback" id="feedback" onChange={this.onFeedbackChange} /><br />
         </label>
         <br />
-        <input type="button" value="Submit" id="submit" onClick={this.props.store.onFeedbackClick} />
+        <input type="button" value="Submit" id="submit" onClick={this.onSubmit} />
       </div>
     );
   }

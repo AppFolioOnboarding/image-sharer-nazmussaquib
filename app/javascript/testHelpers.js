@@ -1,8 +1,16 @@
 /* eslint import/no-extraneous-dependencies: 1 */
-
+import jsdom from 'jsdom-global';
 import 'jsdom-global/register';
 import Adapter from 'enzyme-adapter-react-16/build/index';
 import { configure } from 'enzyme';
+
+//
+// Set up the DOM
+//
+jsdom(undefined, {
+  url: 'https://example.appfolio.com'
+});
+global.location = { origin: 'https://example.appfolio.com' };
 
 configure({ adapter: new Adapter() });
 

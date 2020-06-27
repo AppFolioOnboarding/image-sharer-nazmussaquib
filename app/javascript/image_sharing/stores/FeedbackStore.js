@@ -5,12 +5,10 @@ export class FeedbackStore {
   /* Implement your feedback store*/
   @observable name;
   @observable feedback;
-  @observable message;
 
   constructor() {
     this.name = '';
     this.feedback = '';
-    this.message = '';
   }
 
   @action
@@ -23,11 +21,6 @@ export class FeedbackStore {
     this.feedback = feedback;
   }
 
-  @action
-  setMessage(message) {
-    this.message = message;
-  }
-
   onFeedbackClick = () => {
     const params = {
       feedback: {
@@ -36,9 +29,7 @@ export class FeedbackStore {
       }
     };
     const service = new PostFeedbackService(params);
-    service.postFeedback()
-      .then(() => this.setMessage('success'))
-      .catch(() => this.setMessage('failure'));
+    return service.postFeedback();
   }
 }
 
